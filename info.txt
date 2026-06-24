@@ -1,0 +1,75 @@
+🎯 Baseline accuracy: 0.467  (evaluated on 30/32 parseable responses)
+
+Per-class metrics (baseline):
+                    precision    recall  f1-score   support
+
+     Game Analysis       0.67      0.33      0.44         6
+ Visceral Reaction       0.50      0.92      0.65        12
+Hostile Trash Talk       0.20      0.08      0.12        12
+
+          accuracy                           0.47        30
+         macro avg       0.46      0.44      0.40        30
+      weighted avg       0.41      0.47      0.39        30
+
+
+
+
+      Running inference on test set...
+
+🎯 Fine-tuned model accuracy: 0.844
+
+Per-class metrics (fine-tuned model):
+                    precision    recall  f1-score   support
+
+     Game Analysis       0.83      0.71      0.77         7
+ Visceral Reaction       0.86      0.92      0.89        13
+Hostile Trash Talk       0.83      0.83      0.83        12
+
+          accuracy                           0.84        32
+         macro avg       0.84      0.82      0.83        32
+      weighted avg       0.84      0.84      0.84        32
+
+
+      Wrong predictions: 5 / 32
+
+--- #1 ---
+Text:      Sorry Spurs fans, this isn't personal... but they deserved that loss. 
+
+Absolutely ridiculous. 
+True:      Visceral Reaction
+Predicted: Hostile Trash Talk  (confidence: 0.74)
+
+--- #2 ---
+Text:      SPURS ARE SOOO DUMB!! THEY DESERVE ALL OF THIS. WOW. I HATE THE KNICKS BUT THEY BETTER WIN NEXT GAME AND CLOSE THIS OUT. Spurs, I am just lost for words.
+True:      Hostile Trash Talk
+Predicted: Visceral Reaction  (confidence: 0.90)
+
+--- #3 ---
+Text:      I'm so glad the Knicks won if for no other reason than it shut half of this brain-damaged sub up. You are consistently the worst people I have ever had the displeasure of interacting with, and I hope ...
+True:      Game Analysis
+Predicted: Visceral Reaction  (confidence: 0.98)
+
+--- #4 ---
+Text:      That’s a choke that’s going To live with these spurs players until they win a title 
+
+Wemby was atrocious in the second half 
+True:      Hostile Trash Talk
+Predicted: Game Analysis  (confidence: 0.99)
+
+--- #5 ---
+Text:      WOW what an unbelievable meltdown. Absolutely ridiculous. Only one to blame is that asshat of a coach. I just lost all respect for Johnson as a coach.
+True:      Game Analysis
+Predicted: Hostile Trash Talk  (confidence: 0.56)
+
+==================================================
+RESULTS COMPARISON
+==================================================
+Model                               Accuracy
+---------------------------------------------
+Zero-shot baseline (Groq)              0.467
+Fine-tuned DistilBERT                  0.844
+---------------------------------------------
+
+Fine-tuning improvement: 0.377
+
+Use these numbers in your README evaluation report.
