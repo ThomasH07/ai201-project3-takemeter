@@ -1,108 +1,75 @@
-milestone 4
-
-
-Running baseline on 27 examples...
-(May take a few minutes — 0.1s delay between requests to respect free-tier limits)
-
-  10/27 complete...
-  20/27 complete...
-
-⚠️  3 responses could not be parsed.
-Review your prompt — the model may not be outputting clean label names.
-
-🎯 Baseline accuracy: 0.542  (evaluated on 24/27 parseable responses)
+🎯 Baseline accuracy: 0.467  (evaluated on 30/32 parseable responses)
 
 Per-class metrics (baseline):
                     precision    recall  f1-score   support
 
-     Game Analysis       1.00      0.60      0.75         5
- Visceral Reaction       0.47      0.78      0.58         9
-Hostile Trash Talk       0.50      0.30      0.38        10
+     Game Analysis       0.67      0.33      0.44         6
+ Visceral Reaction       0.50      0.92      0.65        12
+Hostile Trash Talk       0.20      0.08      0.12        12
 
-          accuracy                           0.54        24
-         macro avg       0.66      0.56      0.57        24
-      weighted avg       0.59      0.54      0.53        24
-
-      
-Run the baseline cells. The notebook will classify every example in your test set, print overall accuracy and per-class metrics, and flag any responses it couldn't parse. If more than ~10% of responses are unparseable, revise your prompt to make the expected output format clearer.
+          accuracy                           0.47        30
+         macro avg       0.46      0.44      0.40        30
+      weighted avg       0.41      0.47      0.39        30
 
 
-Reflect briefly: where did the baseline struggle? Are there specific labels it consistently confuses? Write down your hypothesis — you'll test it after fine-tuning.
 
-Epoch	Training Loss	Validation Loss	Accuracy
-1	1.098100	1.098558	0.407407
-2	1.048449	1.018439	0.555556
-3	0.974708	0.885855	0.592593
-4	0.634659	0.802855	0.666667
-5	0.446949	0.681985	0.703704
-6	0.320186	0.629990	0.777778
-7	0.134514	0.614097	0.814815
-8	0.066505	0.626186	0.814815
-9	0.027436	0.653087	0.814815
-10	0.018566	0.676839	0.851852
-11	0.015103	0.698427	0.851852
-12	0.012430	0.716414	0.851852
-13	0.010490	0.731643	0.851852
-14	0.009180	0.743021	0.851852
-15	0.008542	0.752219	0.851852
-16	0.007888	0.759577	0.851852
-17	0.007334	0.765213	0.851852
-18	0.007366	0.769804	0.851852
-19	0.006650	0.772168	0.851852
-20	0.006913	0.772949	0.851852
 
-Running inference on test set...
+      Running inference on test set...
 
-🎯 Fine-tuned model accuracy: 0.815
+🎯 Fine-tuned model accuracy: 0.844
 
 Per-class metrics (fine-tuned model):
                     precision    recall  f1-score   support
 
-     Game Analysis       0.86      0.86      0.86         7
- Visceral Reaction       0.78      0.70      0.74        10
-Hostile Trash Talk       0.82      0.90      0.86        10
+     Game Analysis       0.83      0.71      0.77         7
+ Visceral Reaction       0.86      0.92      0.89        13
+Hostile Trash Talk       0.83      0.83      0.83        12
 
-          accuracy                           0.81        27
-         macro avg       0.82      0.82      0.82        27
-      weighted avg       0.81      0.81      0.81        27
+          accuracy                           0.84        32
+         macro avg       0.84      0.82      0.83        32
+      weighted avg       0.84      0.84      0.84        32
 
 
-Wrong predictions: 5 / 27
+      Wrong predictions: 5 / 32
 
 --- #1 ---
-Text:      WHAT THE HELL JUST HAPPENED!!!!???? OMGGGGGG
+Text:      Sorry Spurs fans, this isn't personal... but they deserved that loss. 
+
+Absolutely ridiculous. 
 True:      Visceral Reaction
-Predicted: Hostile Trash Talk  (confidence: 0.62)
+Predicted: Hostile Trash Talk  (confidence: 0.74)
 
 --- #2 ---
-Text:      Daaaamn absolute insane comeback 
-True:      Visceral Reaction
-Predicted: Hostile Trash Talk  (confidence: 0.79)
+Text:      SPURS ARE SOOO DUMB!! THEY DESERVE ALL OF THIS. WOW. I HATE THE KNICKS BUT THEY BETTER WIN NEXT GAME AND CLOSE THIS OUT. Spurs, I am just lost for words.
+True:      Hostile Trash Talk
+Predicted: Visceral Reaction  (confidence: 0.90)
 
 --- #3 ---
-Text:      Spurs playing historically stupid basketball in the 2nd half
+Text:      I'm so glad the Knicks won if for no other reason than it shut half of this brain-damaged sub up. You are consistently the worst people I have ever had the displeasure of interacting with, and I hope ...
 True:      Game Analysis
-Predicted: Visceral Reaction  (confidence: 0.66)
+Predicted: Visceral Reaction  (confidence: 0.98)
 
 --- #4 ---
-Text:      This comeback is like, top 3 ball moment of all time for me lmao 
-True:      Visceral Reaction
-Predicted: Game Analysis  (confidence: 0.85)
+Text:      That’s a choke that’s going To live with these spurs players until they win a title 
+
+Wemby was atrocious in the second half 
+True:      Hostile Trash Talk
+Predicted: Game Analysis  (confidence: 0.99)
 
 --- #5 ---
-Text:      Suck a fat one, Wemby!
-True:      Hostile Trash Talk
-Predicted: Visceral Reaction  (confidence: 0.70)
+Text:      WOW what an unbelievable meltdown. Absolutely ridiculous. Only one to blame is that asshat of a coach. I just lost all respect for Johnson as a coach.
+True:      Game Analysis
+Predicted: Hostile Trash Talk  (confidence: 0.56)
 
 ==================================================
 RESULTS COMPARISON
 ==================================================
 Model                               Accuracy
 ---------------------------------------------
-Zero-shot baseline (Groq)              0.542
-Fine-tuned DistilBERT                  0.815
+Zero-shot baseline (Groq)              0.467
+Fine-tuned DistilBERT                  0.844
 ---------------------------------------------
 
-Fine-tuning improvement: 0.273
+Fine-tuning improvement: 0.377
 
 Use these numbers in your README evaluation report.
